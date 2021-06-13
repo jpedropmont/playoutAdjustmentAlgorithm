@@ -3,6 +3,7 @@
 
 var parsedJSON = require("./myOutputFile.json");
 const arr = Object.values(parsedJSON);
+const util = require("util");
 
 let u = 0.001998;
 let histDi =
@@ -43,4 +44,11 @@ for (i = 0; i < arr.length; i++) {
   }
 }
 
-console.log(((lostCount / arr.length) * 100).toFixed(2) + "%");
+const log = {
+  usedPackages: arr.length - lostCount,
+  lostPackages: lostCount,
+  total: arr.length,
+  percentLostPackages: ((lostCount / arr.length) * 100).toFixed(2) + "%",
+};
+
+console.table(log);
